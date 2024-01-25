@@ -17,19 +17,19 @@ app.post('/', validationMiddleware, (req: Request, res: Response) => {
         feature.includes(FeatureEnum.PALINDROME) &&
         feature.includes(FeatureEnum.PRIME)
     ) {
-        for (let i = minNumber; i < maxNumber; i++) {
+        for (let i = minNumber; i <= maxNumber; i++) {
             if (isPalindrome(i) && isPrime(i)) {
                 data.push(i);
             }
         }
     } else if (feature.includes(FeatureEnum.PALINDROME)) {
-        for (let i = minNumber; i < maxNumber; i++) {
+        for (let i = minNumber; i <= maxNumber; i++) {
             if (isPalindrome(i)) {
                 data.push(i);
             }
         }
     } else if (feature.includes(FeatureEnum.PRIME)) {
-        for (let i = minNumber; i < maxNumber; i++) {
+        for (let i = minNumber; i <= maxNumber; i++) {
             if (isPrime(i)) {
                 data.push(i);
             }
