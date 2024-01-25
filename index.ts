@@ -4,7 +4,7 @@ import { FeatureEnum } from './feature.enum';
 import { isPalindrome, isPrime } from './service';
 import { validationMiddleware } from './middleware';
 
-const app = express();
+export const app = express();
 app.use(express.json());
 const PORT = 3000;
 
@@ -18,20 +18,27 @@ app.post('/', validationMiddleware, (req: Request, res: Response) => {
         feature.includes(FeatureEnum.PRIME)
     ) {
         for (let i = minNumber; i < maxNumber; i++) {
-            if (isPalindrome(i) && isPrime(i)) data.push(i);
+            if (isPalindrome(i) && isPrime(i)) {
+                data.push(i);
+            }
         }
     } else if (feature.includes(FeatureEnum.PALINDROME)) {
         for (let i = minNumber; i < maxNumber; i++) {
-            if (isPalindrome(i)) data.push(i);
+            if (isPalindrome(i)) {
+                data.push(i);
+            }
         }
     } else if (feature.includes(FeatureEnum.PRIME)) {
         for (let i = minNumber; i < maxNumber; i++) {
-            if (isPrime(i)) data.push(i);
+            if (isPrime(i)) {
+                data.push(i);
+            }
         }
     }
 
     const end = performance.now();
-
+    res.set('Strict-Transport-Security', ['max-age=63072000', 'includeSubDomains', 'preload'])
+    res.set('')
     res.send({ data, timeOfExecution: end - start });
 });
 
