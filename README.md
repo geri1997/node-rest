@@ -2,6 +2,7 @@
 
 - NodeJs version >= 18
 - Docker (optional, for containerized startup)
+- SSL Certificate (a test certificate has been provided inside the `cert` folder. In production, replace it with your own certificate)
 
 # Build & Run locally
 
@@ -28,17 +29,20 @@ In the root directory run:
 
 When running locally or with Docker, the server starts at port `3000`. To send requests you can use a tool like Postman.
 
-The application has only one `POST` http endpoint at path `/`. The request body must have 3 parameters
+The application has only one `POST` endpoint at path `/`. The request body must have 3 parameters
 
 - `minNumber` - minimum number
 - `maxNumber` - maximum number
 - `feature` -  array of `"prime"` and/or `"palindrome"`
 
+Requests can be sent to `http://localhost` or `https://localhost:3000`. The requests to the
+ http endpoint will be redirected to the https endpoint.
+
 ## Example API requests
 
 ### Example 1 - Primes
 
-Sending a `POST` request to `http://localhost:3000` with request body:
+Sending a `POST` request to `https://localhost:3000` with request body:
 
     {
         "minNumber":1,
@@ -55,18 +59,17 @@ You should receive a response with status code `200` and body as below:
             3,
             5,
             7,
-            11,
-            13
+            11
         ],
-        "timeOfExecution": 0.0901999999769032
+        "timeOfExecution": 0.03970000147819519
     }
 
-The numbers in `data` are all the primes between `minNumber` and `maxNumber`(inclusive). 
+The numbers in `data` are all the primes between `minNumber` and `maxNumber`(exclusive). 
 `1` is not included in the response because it is not considered a prime.
 
 ### Example 2 - Palindrome and Prime
 
-Sending a `POST` request to `http://localhost:3000` with request body:
+Sending a `POST` request to `https://localhost:3000` with request body:
 
     {
         "minNumber":1,
@@ -92,7 +95,7 @@ You should receive a response with status code `200` and body as below:
 
 ### Example 3 - Invalid Request
 
-Sending a `POST` request to `http://localhost:3000` with request body:
+Sending a `POST` request to `https://localhost:3000` with request body:
 
     {
         "minNumber":-1,
