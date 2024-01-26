@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { RequestBody } from './types';
-import { FeatureEnum } from "./feature.enum";
+import { RequestBody } from '../types';
+import { FeatureEnum } from "../feature.enum";
 
 export function validationMiddleware(
     req: Request,
@@ -27,7 +27,7 @@ export function validationMiddleware(
     }
 
     if (errors.length > 0) {
-        res.status(400).send({errors});
+        res.status(400).send({ errors });
         return;
     }
     next();

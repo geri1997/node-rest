@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { FeatureEnum } from "./feature.enum";
-import { isValidFeatureArray, isValidMaxNumber, isValidMinNumber, validationMiddleware } from "./middleware";
+import { isValidFeatureArray, isValidMaxNumber, isValidMinNumber, validationMiddleware } from "./middleware/validation";
 import { isPalindrome, isPrime } from './service';
 
 describe('check if number is prime', () => {
