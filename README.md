@@ -17,13 +17,21 @@
 In the root directory run:
 
     docker build -t node-rest .
-    docker run -it -p 3000:3000 node-rest 
+    docker run -it -p 3000:3000 -p 80:80 node-rest 
 
 ## Docker compose
 
 In the root directory run:
 
+    docker compose build
     docker compose up
+
+# Security features
+
+- HTTPS
+- HTTP Security Headers with `Helmet`
+- Rate limiting
+- Input validation
 
 # How to use
 
@@ -37,6 +45,8 @@ The application has only one `POST` endpoint at path `/`. The request body must 
 
 Requests can be sent to `http://localhost` or `https://localhost:3000`. The requests to the
  http endpoint will be redirected to the https endpoint.
+
+
 
 ## Example API requests
 

@@ -9,6 +9,9 @@ import * as https from 'https'
 import * as fs from 'fs'
 import { rateLimitMiddleware } from "./middleware/rate-limiter";
 
+const HTTPS_PORT = 3000;
+const HTTP_PORT = 80;
+
 const options = {
     key: fs.readFileSync('./cert/localhost.key'),
     cert: fs.readFileSync('./cert/localhost.crt')
@@ -21,11 +24,11 @@ app.use((req, res, next) => {
     if (req.secure) {
         next();
     } else {
-        res.redirect(307, `https://${req.hostname}:3000${req.url}`);
+        res.redirect(307, `https://${req.hostname}:${HTTPS_PORT}${req.url}`);
     }
 });
 
-http.createServer(app).listen(80);
+http.createServer(app).listen(HTTP_PORT);
 const server = https.createServer(options, app);
 
 app.use(express.json());
@@ -65,8 +68,7 @@ app.post('/', validationMiddleware, (req: Request, res: Response) => {
 });
 
 
-const PORT = 3000;
 
-server.listen(PORT, () => {
-    console.log(`Server successfully started at port ${PORT}!`);
+server.listen(HTTPS_PORT, () => {
+    console.log(`Server successfully started at port ${HTTPS_PORT}!`);
 });
